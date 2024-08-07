@@ -99,7 +99,10 @@ class Dart2JsSupport extends CompilerSupport with JsHtmlWrapper {
     required String root,
     required String faviconPath,
   }) async {
+
     var server = shelf_io.IOServer(await HttpMultiServer.loopback(0));
+    server.server.defaultResponseHeaders.add('Cross-Origin-Embedder-Policy', 'require-corp');
+    server.server.defaultResponseHeaders.add('Cross-Origin-Opener-Policy', 'same-origin');
     return Dart2JsSupport._(
         config, defaultTemplatePath, server, root, faviconPath);
   }

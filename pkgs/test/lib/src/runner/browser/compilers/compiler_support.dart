@@ -69,7 +69,7 @@ mixin JsHtmlWrapper on CompilerSupport {
           .replaceFirst('{{testScript}}', link)
           .replaceAll('{{testName}}', testName);
       return shelf.Response.ok(processedContents,
-          headers: {'Content-Type': 'text/html'});
+          headers: {'Content-Type': 'text/html','Cross-Origin-Embedder-Policy': 'require-corp', 'Cross-Origin-Opener-Policy': 'same-origin'});
     }
 
     return shelf.Response.notFound('Not found.');

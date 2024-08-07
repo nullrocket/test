@@ -91,7 +91,8 @@ abstract class PrecompiledSupport extends CompilerSupport {
     required String faviconPath,
   }) async {
     var server = shelf_io.IOServer(await HttpMultiServer.loopback(0));
-
+    server.server.defaultResponseHeaders.add('Cross-Origin-Embedder-Policy', 'require-corp');
+    server.server.defaultResponseHeaders.add('Cross-Origin-Opener-Policy', 'same-origin');
     return switch (compiler) {
       Compiler.dart2js => JsPrecompiledSupport._(
           config, defaultTemplatePath, server, root, faviconPath),
